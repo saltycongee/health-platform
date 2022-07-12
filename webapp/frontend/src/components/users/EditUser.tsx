@@ -63,19 +63,17 @@ export const EditPatient = (props: { numAdmin: number, user: UsersDetail }) => {
                 IdentityPoolId: process.env.REACT_APP_IDENTITYPOOLID,
                 region: "us-west-2",
             });
-            // console.log(process.env.AWS_CONFIG_FILE)
-            // AWS.config.loadFromPath(process.env.AWS_CONFIG_FILE);
             var CognitoIdentityServiceProvider = AWS.CognitoIdentityServiceProvider;
             var client = new CognitoIdentityServiceProvider({ apiVersion: '2016-04-19', region: 'us-west-2' });
             await client.adminDeleteUser({
                 UserPoolId: process.env.REACT_APP_USERPOOLID,
                 Username: props.user.user_id,
-            }).promise();
+            }).promise();                                                                                                                               
             console.log("deleteUsersDetail response:", response);
         } catch (e) {
             console.log("updateUsersDetail errors:", e);
         }
-
+        
         // TODO: Update table to avoid reloading page
         window.location.reload();
     };
